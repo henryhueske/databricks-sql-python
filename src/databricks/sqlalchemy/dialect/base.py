@@ -102,6 +102,8 @@ class DatabricksDDLCompiler(compiler.DDLCompiler):
                     create_column, first_pk=column.primary_key and not first_pk
                 )
                 # Add backquotes to column names if there are none - assumes no spaces in column name
+                if column.autoincrement is True:
+                    print(f"processed autoincrement column: {processed}")
                 if '`' not in processed:
                     processed = '`' + "".join(processed.split(" ")[0]) + "` " + " ".join(processed.split(" ")[1:])
                 if column.autoincrement is True:   # If doesn't work try 'is True' and == 'True'
